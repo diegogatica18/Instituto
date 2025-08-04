@@ -1,0 +1,10 @@
+@startuml Caso clinica
+
+[*] --> Inicio 
+
+
+
+
+
+
+@enduml

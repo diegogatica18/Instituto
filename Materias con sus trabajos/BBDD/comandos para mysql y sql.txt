@@ -1,0 +1,215 @@
+°entrar a mysql con:
+
+sudo mysql
+(o)
+mysql -u root -p
+(o)
+mysql -h localhost -u root -p
+
+° ver estado de estado en mysql
+
+status
+
+°ejemplo de como crear una tabla.
+
+CREATE TABLE Empleados (IDE INT PRIMARY KEY, Nombre VARCHAR(50), Apellido VARCHAR(50), Email VARCHAR(100), Departamento INT, Salario DECIMAL(10, 2));
+
+°Como crear una base de datos:
+
+CREATE DATABASE (nombre de la base de datos:)"local";
+
+°usar base de datos con:
+
+use (nombre de la base de datos)
+
+°mostrar las tablas:
+
+SHOW TABLES;
++-------------------+
+| Tables_in_Empresa |
++-------------------+
+| Empleados     	|
++-------------------+
+
+°describir estructura con:
+
+DESCRIBE (nombre de la tabla);
++--------------+---------------+------+-----+---------+-------+
+| Field    	| Type      	| Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| IDE      	| int       	| NO   | PRI | NULL	|   	|
+| Nombre   	| varchar(50)   | YES  | 	| NULL	|   	|
+| Apellido 	| varchar(50)   | YES  | 	| NULL	|   	|
+| Email    	| varchar(100)  | YES  | 	| NULL	|   	|
+| Departamento | int       	| YES  | 	| NULL	|   	|
+| Salario  	| decimal(10,2) | YES  | 	| NULL	|   	|
++--------------+---------------+------+-----+---------+-------+
+
+°visualizar tabla:
+
+mysql> SELECT * FROM  Empleados; 
+si se sabe el nombre de la columna se pone mysql> SELECT nombre FROM  Empleados; 
+para mostrar mas de una columna se usa mysql> SELECT ide, nombre  FROM  Empleados;
+para ordenar (filtrar) usar mysql> SELECT * FROM  Empleados ORDER BY salario;
+
+Empty set (0,02 sec)
+
++-----+--------+----------+-----------------------+--------------+-----------+
+| IDE | Nombre | Apellido | Email             	| Departamento | Salario   |
++-----+--------+----------+-----------------------+--------------+-----------+
+|   1 | Pepito | Perez	| pepitoperez@gmail.com |       	10 | 300000.00 |
++-----+--------+----------+-----------------------+--------------+-----------+
+
++-----+--------+
+| ide | nombre |
++-----+--------+
+|   1 | Pepito |
+|   8 | Juan   |
+|  10 | Ramona |
++-----+--------+
+
++-----+--------+----------+-----------------------+--------------+-----------+
+| IDE | Nombre | Apellido | Email             	  | Departamento | Salario   |
++-----+--------+----------+-----------------------+--------------+-----------+
+|   2 | Laura  | Sanchez  |                   	  |       	10   |   5000.00 |
+|   1 | Pepito | Perez	  | pepitoperez@gmail.com |       	10   | 300000.00 |
+|   8 | Juan   | Smith	  |                   	  |       	10   | 400000.00 |
+|  10 | Ramona | Smith	  |                   	  |       	10   | 500000.00 |
++-----+--------+----------+-----------------------+--------------+-----------+
+°como cargar datos en la tabla
+
+mysql> INSERT INTO Empleados VALUES (1, "Pepito", "Perez", "pepitoperez@gmail.com"
+, 10, 300000);
+
+Para concatenar (Unir) columnas
+mysql> SELECT CONCAT( apellido, departamento) FROM Empleados;
+para darle un Alias se usa: mysql> SELECT CONCAT( apellido, " ", departamento) AS Empleados FROM Empleados;
+mysql> SELECT CONCAT( apellido, " ", departamento) AS "Empleados y Deptos" FROM Empleados;
+
+-----------------------------------------------------------------------------------
+Cláusulas del comando SELECT son: AS y FROM
+
++---------------------------------+
+| CONCAT( apellido, departamento) |
++---------------------------------+
+| Perez10                      	  |
+| Sanchez10                   	  |
+| Smith10                     	  |
+| Smith10                     	  |
++---------------------------------+
+
++------------+
+| Empleados  |
++------------+
+| Perez 10   |
+| Sanchez 10 |
+| Smith 10   |
+| Smith 10   |
++------------+
+
++--------------------+
+| Empleados y Deptos |
++--------------------+
+| Perez 10       	 |
+| Sanchez 10     	 |
+| Smith 10       	 |
+| Smith 10       	 |
++--------------------+
+
+Para eliminar el registro completo
+usar mysql> DELETE FROM Empleados;
+
+Para eliminar una fila o en este caso empleado 
+usar mysql> DELETE FROM Empleados WHERE IDE = 3;
+para eliminar más de un empleado usar mysql> DELETE FROM Empleados WHERE IDE = 1 OR IDE = 2 OR IDE = 4;
+o usar mysql> DELETE FROM Empleados WHERE IDE = 1 <> 8;
+o mysql> DELETE FROM Empleados WHERE IDE < 5;
+
++-----+--------+----------+-----------------------+--------------+-----------+
+| IDE | Nombre | Apellido | Email             	  | Departamento   | Salario |
++-----+--------+----------+-----------------------+--------------+-----------+
+|   1 | Pepito | Perez	  | pepitoperez@gmail.com |       	10   | 300000.00 |
+|   2 | Laura  | Sanchez  |                   	  |       	10   |   5000.00 |
+|   8 | Juan   | Smith	  |                   	  |       	10   | 400000.00 |
++-----+--------+----------+-----------------------+--------------+-----------+
+
++-----+--------+----------+-------+--------------+-----------+
+| IDE | Nombre | Apellido | Email | Departamento | Salario   |
++-----+--------+----------+-------+--------------+-----------+
+|   8 | Juan   | Smith	  |   	  |       	10   | 400000.00 |
++-----+--------+----------+-------+--------------+-----------+
+
+Para modificar todos los registros
+
+mysql> UPDATE Empleados SET email = "jsmith69@gmail.com"
++-----+--------+----------+--------------------+--------------+-----------+
+| IDE | Nombre | Apellido | Email          	   | Departamento | Salario   |
++-----+--------+----------+--------------------+--------------+-----------+
+|   8 | Juan   | Smith	| jsmith69@gmail.com   |       	10    | 400000.00 |
++-----+--------+----------+--------------------+--------------+-----------+
+
+Para modificar un registro
+mysql> UPDATE Empleados SET email = "jsmith69@gmail.com" WHERE IDE = 8;
+
++-----+--------+----------+--------------------+--------------+-----------+
+| IDE | Nombre | Apellido | Email          	   | Departamento | Salario   |
++-----+--------+----------+--------------------+--------------+-----------+
+|   8 | Juan   | Smith	  | jsmith69@gmail.com |       	10    | 400000.00 |
++-----+--------+----------+--------------------+--------------+-----------+
+
+-------------------------------------------------------------------------------
+CLASE 22/4
+
+Ver bases de datos disponibles
+SHOW DATABASES;
+
+Ver tablas/relaciones en base de datos
+SHOW TABLES;
+
+Borrar datos en tabla pero sin borrar esta
+TRUNCATE Empleados;
+
+Modificar estructura de la tabla
+ALTER TABLE Empleados
+ADD FOREIGN KEY (Departamento)
+REFERENCES Departamentos(IDDepartamento);
+
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| IDE          | int           | NO   | PRI | NULL    |       |
+| Nombre       | varchar(50)   | YES  |     | NULL    |       |
+| Apellido     | varchar(50)   | YES  |     | NULL    |       |
+| Email        | varchar(100)  | YES  |     | NULL    |       |
+| Departamento | int           | YES  | MUL | NULL    |       |
+| Salario      | decimal(10,2) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+
+Vincular tablas con
+1 SELECT Empleados.Nombre, Empleados.Apellido
+2 FROM Empleados
+3 JOIN Departamentos
+4 ON Empleados.Departamento = Departamentos.IDDepartamento;
+
++--------+----------+
+| Nombre | Apellido |
++--------+----------+
+| Franco | Delpino  |
++--------+----------+
+
+SELECT Empleados.Nombre, Empleados.Apellido, Departamentos.NombreDepartamento FROM Empleados JOIN Departamentos ON Empleados.Departamento = Departamentos.IDDepartamento;
++--------+----------+--------------------+
+| Nombre | Apellido | NombreDepartamento |
++--------+----------+--------------------+
+| Franco | Delpino  | Ventas             |
++--------+----------+--------------------+
+
+O tambien se puede 
+
+SELECT Nombre, Apellido, NombreDepartamento FROM Empleados JOIN Departamentos ON Departamento = IDDepartamento;
++--------+----------+--------------------+
+| Nombre | Apellido | NombreDepartamento |
++--------+----------+--------------------+
+| Franco | Delpino  | Ventas             |
++--------+----------+--------------------+
+

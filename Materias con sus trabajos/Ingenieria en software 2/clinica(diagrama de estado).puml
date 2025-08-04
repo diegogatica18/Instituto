@@ -1,0 +1,19 @@
+@startuml Clinica
+
+[*] --> Inicio 
+
+state c1 <<choice>> 
+state c2 <<choice>>
+
+Inicio --> c1 : Esta disponible la habitacion? 
+c1 --> Habilitada : si
+c1 --> Deshabilitada : no 
+
+Habilitada -->  c2 : La habitacion esta libre o ocupada?
+c2 --> Libre 
+c2 --> Ocupada 
+Ocupada --> EnLimpieza : El paciente es dado de alta
+EnLimpieza --> Libre: La habitacion ya esta limpia 
+Libre --> Deshabilitada : La habitacion requiere reparacion
+Deshabilitada --> Libre : La reparacion fue finalizada
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+
+  class Empleado {
+    -tipo_empleado: list
+    -nombre: String
+    -apellido: String
+    -dni: String
+    -edad: int
+    -sexo: String
+    -sueldo: float
+
+    +insertar_empleado(): void
+    +modificar_empleado(): void
+    +anular_empleado(): void
+    +asignar_puesto(): void
+    +modificar_puesto(): void
+    +anular_puesto(): void
+  }
+  class Cliente {
+    -tipo_cliente: list
+    -nombre: String
+    -apellido: String
+    -dni: String
+    -telefono: String
+    -email: String
+    -edad: int
+    -sexo: String
+
+    +insertar_cliente(): void
+    +modificar_cliente(): void  
+    +anular_cliente(): void
+}
+    class Empresa {
+    -tipo_empresa: list
+    -nombre: String
+    -cuit: int
+    +Insertar_empresa(): void
+    +Modificar_empresa(): void
+    +Anular_empresa(): void
+    }
+
+Empresa "1..*" o-- "1" Empleado
+Empresa "1..*" o-- "1" Cliente
+@enduml

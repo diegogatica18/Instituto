@@ -1,0 +1,20 @@
+@startuml  Caso pasajes
+
+[*] --> Pasajes
+
+state c1 <<choice>>
+Pasajes --> c1: ¿El pasaje es valido?
+c1 --> Disponible : si 
+c1 --> PasajesInvalidos : no
+Disponible --> EnVenta
+EnVenta --> Reservado
+
+state c2 <<choice>>
+Reservado --> c2: ¿El pasaje fue vendido?
+c2 --> Vendido : 95%
+c2 --> Cancelado : 5%
+
+
+
+
+@enduml 

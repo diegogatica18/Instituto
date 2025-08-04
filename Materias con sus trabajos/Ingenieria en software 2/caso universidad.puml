@@ -1,0 +1,64 @@
+@startuml
+
+class Usuario { 
+    -nombre: String
+    -apellido: String
+    -gmail: String
+    -domicilio: String
+    -telefono: int
+    -tipo de usuario: String
+    -descripcion: String
+
+    +registrar usuario(): void
+    +modificar usuario(): void
+    +eliminar usuario(): void
+    +registrar tipo de usuario con descripcion(): void
+}
+
+class Alumno {
+    +matricular asignatura(): void
+    +visualizar expediente(): void
+}
+
+class Profesor {
+    +asociar asignatura(): void
+    +cargar acta(): void
+    +publicar acta(): void
+}
+
+Class Asignatura {
+    -nombre: String
+    -curso: String
+
+    +registrar asignatura(): void
+    +modificar asignatura(): void
+    +eliminar asignatura(): void
+}
+
+class Expediente {
+    -asignatura: String
+    -fecha: Datetime
+    -nota: int
+    -profesor: String
+   
+    +registrar expediente(): void
+    +modificar expediente(): void
+}
+
+class Acta { 
+    -alumno: String
+    -curso: String
+
+    +registrar acta(): void
+    +modificar acta(): void
+}
+
+Usuario "1" *-- "1..*" Alumno
+Usuario "1" *-- "1..*" Profesor
+Expediente "1" *-- "0..*" Asignatura
+Expediente "1" *-- "0..*" Acta
+Profesor "1" *-- "0.." Acta
+Usuario "1" *-- "0..*" Expediente
+
+
+@enduml

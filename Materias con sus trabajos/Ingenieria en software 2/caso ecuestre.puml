@@ -1,0 +1,69 @@
+@startuml
+
+Class Cliente {
+    -nombre: String
+    -apellido: String
+    -DNI: int
+    -CUIT: int
+    -tipo_cliente: String
+
+    +registrar_cliente(): void
+    +modificar_cliente(): void
+    +eliminar_cliente(): void
+    +registrar_tipo_cliente(): void
+    +modificar_tipo_cliente(): void
+    +eliminar_tipo_cliente(): void
+    +validar_cliente(): void
+    +consultar_cliente(): void
+    +consultar_tipo_cliente(): void
+}
+
+class Caballo {
+    -altura: float
+    -peso: float
+    -edad: int
+    -cliente: String
+    -establo: String
+
+    +registrar_caballo(): void
+    +modificar_caballo(): void
+    +eliminar_caballo(): void
+    +consultar_caballo(): void
+}
+
+class Establo {
+    -numero: int
+    -ubicacion: String
+    -capacidad: int
+    -estado: String
+
+    +registrar_establo(): void
+    +modificar_establo(): void
+    +eliminar_establo(): void
+    +consultar_establo(): void
+    +consultar_estado(): void
+    +consultar_capacidad(): void
+    +consultar_ubicacion(): void
+    +consultar_numero(): void
+    +cambiar_estado(): void
+}
+
+class Curso {
+    -tipo: String
+    -nivel: int
+
+    +registrar_curso(): void
+    +modificar_curso(): void
+    +eliminar_curso(): void
+    +consultar_curso(): void
+    +asignar_curso(): void
+}
+
+Curso "1..*" *-- "0..*" Caballo
+Caballo "1" *-- "0..*" Establo
+Cliente "1" *-- "0..*" Caballo
+Cliente "1" *-- "0..*" Establo
+Cliente "1" *-- "0..*" Curso
+
+
+@enduml

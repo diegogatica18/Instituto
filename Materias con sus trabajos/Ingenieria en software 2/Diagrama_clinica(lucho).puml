@@ -1,0 +1,34 @@
+@startuml Clinica
+
+[*] --> inicio
+state c1 <<choice>>
+state c2 <<choice>>
+state fork <<fork>>
+state fork2 <<fork>>
+state join <<join>>
+
+inicio --> fork
+fork --> habilidata: no reparar
+fork --> deshabilitada: reparar
+
+habilidata --> fork2
+fork2 --> libre
+fork2 --> ocupada
+libre --> ocupada: Asignar paciente
+ocupada --> desocupada: Dar de alta al paciente
+fork2 --> limpieza
+desocupada --> limpieza: Limpiar
+limpieza --> c2: Termino la limpieza?
+c2 --> limpieza: No
+c2 --> libre: Si
+
+deshabilitada -->  c1: finalizar reparación
+c1 --> habilidata: [despues de x tiempo]
+c1 --> deshabilitada: no puedo finalizar
+
+libre --> join
+ocupada --> join
+limpieza --> join
+join --> deshabilitada: en caso de derrumbe o accion externa
+
+@enduml

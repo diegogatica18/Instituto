@@ -1,0 +1,77 @@
+@startuml
+
+Class Viaje { 
+    -estacion_origen: String
+    -estacion_destino: String
+
+    +registrar_viaje(): void
+    +modificar_viaje(): void
+
+}
+
+Class Billete {
+    -cantidad: int
+    -numero: int
+    -importe_total: float
+    -origen: String
+    -destino: String
+    -fecha: Date
+    -hora: Time
+    -descuento: float
+
+    +registrar_billete(): void
+    +modificar_billete(): void
+    +eliminar_billete(): void
+    +validar_billete(): void
+    +imprimir_billete(): void
+    +validar_cantidad(): void
+    +validar_importe(): void
+}
+
+class Cliente {
+    -nombre: String
+    -apellido: String
+    -edad: Int
+    -gmail: String
+
+    +registrar_cliente(): void
+    +modificar_cliente(): void
+
+}
+class Informe {
+    -numero_de_billetes: int
+    -monto_unitario: float
+    -fecha: Date
+    -hora: Time
+    -monto_total: float
+
+    +generar_informe(): void
+    +modificar_informe(): void
+    +eliminar_informe(): void
+    +descargar_informe(): void
+}
+
+class Revisor {
+    -nombre: String
+    -contraseña: String
+
+    +registrar_revisor(): void
+    +modificar_revisor(): void
+    +eliminar_revisor(): void
+    +validar_revisor(): void
+    +emitir_mensaje_confirmacion(): void
+}
+
+Viaje "1" *-- "0..*" Billete
+Viaje "1" *-- "0..*" Revisor
+Billete "1" *-- "0..*" Informe
+Viaje "1" *-- "0..*" Cliente
+Billete "1" o-- "0..*" Cliente
+Billete "1" o-- "0..*" Revisor
+Revisor "1" o-- "0..*" Informe
+Cliente "1" o-- "0..*" Informe
+Viaje "1" o-- "0..*" Informe
+
+
+
+@enduml

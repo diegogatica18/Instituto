@@ -1,0 +1,65 @@
+@startuml
+
+class Serie {
+    -titulo: String
+    -genero: String
+    -sinopsis: String
+    -reparto: List<String>
+    -fecha de inicio: Date
+
+    +registrar_serie(): void
+    +modificar_serie: void
+}
+
+class Temporadas {
+    -numero: int
+    -fecha de produccion: Date
+    -fecha de estreno: Date
+    -episodios: List<Episodio>
+
+    +registrar_temporada(): void
+    +modificar_temporada(): void
+}
+
+
+class Capitulos {
+    -titulo: String
+    -duracion: int
+    -sinopsis: String
+
+    +registrar_episodio(): void
+    +modificar_episodio(): void
+}
+
+class Actor {
+    -nombre: String
+    -apellido: String
+    -DNI: String
+    -gmail: String
+    -descripcion: String
+    -puesto_asignado: String
+
+    +registrar_actor(): void
+    +modificar_actor(): void
+    +eliminar_actor(): void
+    +asignar_actor(): void
+}
+
+
+class personaje {
+    -reparto: Actor
+
+    +registrar_personaje(): void
+    +modificar_personaje(): void
+}
+
+Serie "1" *-- "0..*" Temporadas
+Temporadas "1" o-- "0..*" Capitulos
+Capitulos "1..*" *-- "1..*" personaje 
+Actor "1" *-- "1..*" personaje
+Serie "1" o-- "1..*" Actor
+
+
+
+
+@enduml

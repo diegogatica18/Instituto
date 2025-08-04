@@ -1,0 +1,29 @@
+@startuml Fotografia
+
+[*] --> Inicio 
+Inicio --> Presentacion : Se presenta la fotografia
+
+state c1 <<choice>> 
+
+Presentacion --> c1 : La fotografia cumple con el tema y las condiciones?
+c1 --> Aceptada : si 
+c1 --> Rechazada : no
+
+Aceptada --> PreSeleccion : Se preselecciona a los 10 semifinalistas
+
+state c2 <<choice>>
+PreSeleccion --> c2 : La fotografia fue selccionada?
+c2 --> Semifinalistas : si
+c2 --> Publicadas : no
+
+Semifinalistas --> Finalistas : Se seleccionan los 3 finalistas
+Finalistas --> PublicaGanadores : Publicacion de las 3 fotografias ganadoras 
+Semifinalistas --> Publicadas : Se publican las que no pasaron a la final
+
+Publicadas --> [*] 
+PublicaGanadores --> [*]
+Rechazada --> [*]
+
+
+
+@enduml

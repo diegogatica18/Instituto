@@ -1,0 +1,72 @@
+@startuml Tp1_caso_gomeria
+
+class Inventario {
+    - Fecha: Datetime 
+    - Monto: Float 
+    - Metodo_pago: String 
+
+    + Modificar_inventario(): Void
+    + Calcular_total(): Void 
+    + Mostrar_inventrario(): Void
+    + Mostrar_metodos_pago(): Void
+}
+
+class Compra {
+    + Registrar_compra(): Void 
+    + Modificar_compra(): Void
+    
+}
+
+class Venta {
+    + Registrar_venta(): Void 
+    + Modificar_venta(): Void
+    + Calcular_ganancia(): Void 
+}
+
+class Persona {
+    - Nombre: String
+    - Apellido: String
+    - Direccion: String
+    - Telefono: Int 
+}
+
+class Proveedor {
+    - Lista_precios: Map<String, Float>
+
+    + Registrar_proveedor(): Void
+    + Modificar_proveedor(): Void 
+    + Mostrar_tabla_precios(): Void
+}
+
+class Cliente {
+    - Lista_clientes: List<Clientes>
+
+    + Registrar_cliente(): Void
+    + Modificar_cliente(): Void 
+}
+
+class Producto {
+    - Nombre: String 
+    - Precio: Float 
+    - Tipo: String 
+    - Marca: String 
+    - Cantidad: Int 
+
+    + Registrar_producto(): Void 
+    + Modificar_producto(): Void 
+    + Eliminar_producto(): Void
+    + Calcular_precio_segun_demanda(): Void
+    + Descontar_producto(): Void
+    + Filtrar_productos(): Void
+    + Gestionar_stock(): Void
+}
+Inventario "1..*" <|-- "1..*" Venta
+Inventario "1..*" <|-- "1..*" Compra
+Inventario "1" o-- "1..*" Producto
+Producto "1..*" o-- "1..*"Venta
+Proveedor "1" <-- "1..*" Producto
+Proveedor <-- Compra
+Persona <|-- Proveedor
+Persona <|-- Cliente
+Producto "1..*" o-- "1" Cliente
+@enduml
