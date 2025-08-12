@@ -1,0 +1,13 @@
+@startuml Clinica
+
+(*) --> "solicitar Dni al paciente"
+
+if "El paciente existe y esta cargado en la BBDD?" then 
+    -->[True] "Solicitar fecha y hora de turno"
+    --> "Turno asignado y almacenado en la BBDD"
+    -right-> (*)
+else 
+    ->[False] "Solicitar datos del paciente"
+    --> "Paciente almacenado en la BBDD"
+    --> "Solicitar fecha y hora de turno"
+@enduml
