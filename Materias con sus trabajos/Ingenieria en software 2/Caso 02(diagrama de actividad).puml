@@ -1,0 +1,24 @@
+@startuml Caso pasaje
+
+(*) -right--> "seleccionar vuelo"
+if "El vuelo esta disponible?" then 
+    -->[True] "solicitar documentacion"
+        if "el pasajero es extranjero?" then 
+            -->[True] "solicitar informacion adicional"
+            --> "pasajero registrado"
+        else 
+            -->[False] "pasajero registrado"
+            --> "Solicitar descuentos"
+            if "El pasajero tiene descuento?" then 
+                -->[True] "aplicar descuento"
+                --> "calcular pasaje"
+            else 
+                -->[False] "calcular pasaje"
+                -right-> "vender pasaje" 
+            endif
+        endif
+else
+    -->[False] "ofrecer vuelos alternativos"
+    --> "seleccionar vuelo"
+    endif 
+@enduml
